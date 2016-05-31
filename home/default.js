@@ -1,3 +1,4 @@
+
 var reviews = [
   {
     name: 'Starbucks',
@@ -15,3 +16,26 @@ var reviews = [
     review: 'Buying tires can be pretty expensive if you come here. The upside is purchasing the warranty. Then whenever something happens to your tire, you can get it replaced for a reasonable price.'
   }
 ]
+var push = document.getElementById('button');
+
+function partialMatch(text) {
+  var suggestions = [];
+  for ( var i = 0; i < reviews.length; i = i + 1 ) {
+    var offset = reviews[i].name.indexOf(text);
+    if (offset === -1) {
+    } else {
+      suggestions.push(reviews[i]);
+    }
+  }
+  return suggestions;
+}
+
+push.addEventListener('click', function() {
+  var term = document.getElementById('term');
+  var matches = partialMatch(term.value);
+  for ( var i = 0; i < matches.length; i++ ) {
+    var review = document.createElement('p');
+    review.textContent = matches[i].name;
+    document.body.appendChild(review);
+  };
+});
