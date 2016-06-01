@@ -16,7 +16,7 @@ var reviews = [
     review: 'Buying tires can be pretty expensive if you come here. The upside is purchasing the warranty. Then whenever something happens to your tire, you can get it replaced for a reasonable price.'
   }
 ]
-var push = document.getElementById('button');
+var push = document.getElementById('searchbutton');
 
 function partialMatch(text) {
   var suggestions = [];
@@ -34,8 +34,28 @@ push.addEventListener('click', function() {
   var term = document.getElementById('term');
   var matches = partialMatch(term.value);
   for ( var i = 0; i < matches.length; i++ ) {
-    var review = document.createElement('p');
-    review.textContent = matches[i].name;
-    document.body.appendChild(review);
+    document.body.appendChild(review(matches[i]))
   };
 });
+var msg = 'wrote a review for';
+
+function review(data) {
+  var container = document.createElement('div');
+  container.setAttribute('class', 'col-md-4 panel panel-default wrote');
+
+  var customer = document.createElement('div');
+  customer.textContent = data.reviewer;
+
+  var write = document.createElement('div');
+  write.textContent = msg;
+
+  var business = document.createElement('div');
+  business.textContent = data.name;
+
+  container.appendChild(customer);
+  customer.appendChild(write);
+  write.appendChild(business);
+  return container;
+
+
+}
