@@ -3,7 +3,7 @@ var reviews = [
   {
     name: 'Starbucks',
     reviewer: 'Tom',
-    review: 'I enjoy coming here because the staff remembers me by name and they are very courteous. The place is clean and well kept'
+    review: 'I enjoy coming here because the staff remembers me by name and they are very courteous. The place is clean and well kept.'
   },
   {
     name: 'La Salsa',
@@ -37,24 +37,29 @@ push.addEventListener('click', function() {
     document.body.appendChild(review(matches[i]))
   };
 });
-var msg = 'wrote a review for';
+var msg = ' wrote a review for ';
 
 function review(data) {
   var container = document.createElement('div');
-  container.setAttribute('class', 'col-md-4 panel panel-default wrote');
+  container.setAttribute('class', 'col-md-12 panel panel-default wrote');
 
-  var customer = document.createElement('div');
+  var customer = document.createElement('span');
   customer.textContent = data.reviewer;
 
-  var write = document.createElement('div');
+
+  var write = document.createElement('span');
   write.textContent = msg;
 
-  var business = document.createElement('div');
+  var business = document.createElement('span');
   business.textContent = data.name;
+
+  var critique = document.createElement('div');
+  critique.textContent = data.review;
 
   container.appendChild(customer);
   customer.appendChild(write);
   write.appendChild(business);
+  business.appendChild(critique);
   return container;
 
 
