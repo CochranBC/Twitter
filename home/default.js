@@ -31,21 +31,34 @@ function partialMatch(text) {
 }
 
 push.addEventListener('click', function() {
+  var results = document.getElementById('results');
   var term = document.getElementById('term');
   var matches = partialMatch(term.value);
   for ( var i = 0; i < matches.length; i++ ) {
-    document.body.appendChild(review(matches[i]))
+    results.appendChild(review(matches[i]))
   };
+
 });
+
+
 var msg = ' wrote a review for ';
 
 function review(data) {
+  var description = document.createElement('div');
+
   var container = document.createElement('div');
-  container.setAttribute('class', 'col-md-12 panel panel-default wrote');
+  container.setAttribute('class', 'col-md-offset-2 col-md-8');
+
+  var panel = document.createElement('div');
+  panel.setAttribute('class', 'panel panel-default');
+
+  var panelBody = document.createElement('div');
+  panelBody.setAttribute('class', 'panel-body');
+
+  var paragraph = document.createElement('p');
 
   var customer = document.createElement('span');
   customer.textContent = data.reviewer;
-
 
   var write = document.createElement('span');
   write.textContent = msg;
@@ -53,14 +66,37 @@ function review(data) {
   var business = document.createElement('span');
   business.textContent = data.name;
 
-  var critique = document.createElement('div');
+  var critique = document.createElement('p');
   critique.textContent = data.review;
 
-  container.appendChild(customer);
-  customer.appendChild(write);
-  write.appendChild(business);
-  business.appendChild(critique);
+  container.appendChild(panel);
+  panel.appendChild(panelBody);
+  paragraph.appendChild(customer);
+  paragraph.appendChild(write);
+  paragraph.appendChild(business);
+  description.appendChild(paragraph);
+  description.appendChild(critique);
+  panelBody.appendChild(description);
   return container;
 
 
 }
+function show(review) {
+  var results = document.getElementById('results');
+  for (var i = 0; i < array.length; i++) {
+    array[i]
+  }
+}
+function toggle(recent, panel) {
+  var ele = document.getElementById(recent);
+  var results = document.getElementById(panel);
+  if(ele.style.display == "block") {
+    ele.style.display = "none";
+    results.innerhtml = "show";
+
+  }
+  else {
+    ele.style.display = "block";
+    results.innerhtml = "hide";
+  }
+};
