@@ -29,40 +29,40 @@
     <div class="col-md-offset-4 col-md-2">
       <div class="btn-group">
         <button class="btn btn-default" id="home" type="button" value="button">Home</button>
-        <button class="btn btn-default" id="home" type="button" value="button">Write a reveiw</button>
+        <button class="btn btn-default" id="review-button" type="button" value="button">Write a reveiw</button>
       </div>
     </div>
   </div>
   <div class="row" id="results">
   </div>
-<!-- <div class="container-fluid">
-<div class="row">
-<div class="col-md-offset-3 col-md-5">
-<form class="form-horizontal">
-<div class="form-group">
-<label for="firstname" class="col-md-2 control-label">Name</label>
-<div class="col-sm-10">
-<input type="text" class="form-control" id="firstname" placeholder="First Name">
-</div>
-</div>
-<div class="form-group">
-<label for="businessname" class="col-md-2 control-label">Business</label>
-<div class="col-md-10">
-<input type="text" class="form-control" id="businessname" placeholder="Business Name">
-</div>
-</div>
-<div class="form-group">
-<label for="review" class="col-md-2 control-label">Review</label>
-<div class="col-md-10">
-<textarea class="form-control" placeholder="Write review here" rows="5"></textarea>
-</div>
-</div>
-<div class="col-md-offset-10 col-md-2">
-<input class="btn btn-danger" type="submit" value="Submit">
-</div>
-</form>
-</div> -->
-<script src="default.js">
-</script>
+  <div class="row hide" id="review">
+    <div class="col-md-offset-3 col-md-5">
+      <form class="form-horizontal" id="form">
+        <div class="form-group">
+          <label for="firstname" class="col-md-2 control-label">Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="first-name" placeholder="First Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="businessname" class="col-md-2 control-label">Business</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" id="business-name" placeholder="Business Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="review" class="col-md-2 control-label">Review</label>
+          <div class="col-md-10">
+            <textarea class="form-control" id="new-critique" placeholder="Write review here" rows="5"></textarea>
+          </div>
+        </div>
+        <div class="col-md-offset-10 col-md-2">
+          <button class="btn btn-danger" id="add-review" type="button" value="button">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="default.js">
+  </script>
 </body>
 </html>
