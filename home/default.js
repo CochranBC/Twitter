@@ -53,8 +53,7 @@ addReview.addEventListener('click', function() {
   review.reviewer = firstName.value;
   review.name = businessName.value;
   review.review = newCritique.value;
-  reviews.push(review);
-  console.log(reviews);
+  reviews.unshift(review);
 })
 
 function partialMatch(text) {
