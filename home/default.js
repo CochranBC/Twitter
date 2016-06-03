@@ -43,6 +43,16 @@ reviewButton.addEventListener('click', function toggle(reviewButton, form) {
   }
 });
 
+reviewButton.addEventListener('click', function() {
+  var results = document.getElementById('results');
+  results.style.display = "none";
+});
+
+reviewButton.addEventListener('click', function() {
+  var recentReviews = document.getElementById('recent-reviews');
+  recentReviews.style.display = "none";
+});
+
 var addReview = document.getElementById('add-review');
 
 addReview.addEventListener('click', function() {
