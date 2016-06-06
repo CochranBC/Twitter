@@ -21,13 +21,14 @@ var reviews = [
 var push = document.getElementById('searchbutton');
 push.addEventListener('click', function() {
   var results = document.getElementById('results');
+  clear(results);
   var term = document.getElementById('term');
   var matches = partialMatch(term.value);
   for ( var i = 0; i < matches.length; i++ ) {
     results.appendChild(review(matches[i]));
   };
   // Swap in this view.
-  swap('current', results, 'view')
+  swap('current', results, 'view');
 });
 
 var reviewButton = document.getElementById('review-button');
