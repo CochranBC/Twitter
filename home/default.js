@@ -15,21 +15,22 @@ var reviews = [
     reviewer: 'Sam',
     review: 'Buying tires can be pretty expensive if you come here. The upside is purchasing the warranty. Then whenever something happens to your tire, you can get it replaced for a reasonable price.'
   }
-]
+];
 
+// Event Listeners
 var push = document.getElementById('searchbutton');
-
 push.addEventListener('click', function() {
   var results = document.getElementById('results');
   var term = document.getElementById('term');
   var matches = partialMatch(term.value);
   for ( var i = 0; i < matches.length; i++ ) {
-    results.appendChild(review(matches[i]))
+    results.appendChild(review(matches[i]));
   };
+  // Swap in this view.
+  swap('current', results, 'view')
 });
 
 var reviewButton = document.getElementById('review-button');
-
 reviewButton.addEventListener('click', function toggle(reviewButton, form) {
   var form = document.getElementById('review');
   var update = form.className.split(" ");
@@ -42,7 +43,6 @@ reviewButton.addEventListener('click', function toggle(reviewButton, form) {
     form.className += " " + reviewButton;
   }
 });
-
 reviewButton.addEventListener('click', function() {
   var results = document.getElementById('results');
   results.style.display = "none";
@@ -53,8 +53,12 @@ reviewButton.addEventListener('click', function() {
   recentReviews.style.display = "none";
 });
 
-var addReview = document.getElementById('add-review');
+var home = document.getElementById('home');
+home.addEventListener('click', function() {
+  location.href = "index.html";
+});
 
+var addReview = document.getElementById('add-review');
 addReview.addEventListener('click', function() {
   var firstName = document.getElementById('first-name');
   var businessName = document.getElementById('business-name');
@@ -64,8 +68,9 @@ addReview.addEventListener('click', function() {
   review.name = businessName.value;
   review.review = newCritique.value;
   reviews.unshift(review);
-})
+});
 
+// Functions
 function partialMatch(text) {
   var suggestions = [];
   for ( var i = 0; i < reviews.length; i = i + 1 ) {
@@ -76,7 +81,7 @@ function partialMatch(text) {
     }
   }
   return suggestions;
-}
+};
 
 function review(data) {
   var msg = ' wrote a review for ';
@@ -114,4 +119,23 @@ function review(data) {
   description.appendChild(critique);
   panelBody.appendChild(description);
   return container;
+};
+
+function swap(current, next, location) {
+  var old = document.getElementsByClassName(current)[0];
+  old.classList.remove('current');
+  old.classList.add('hide');
+
+  var theLocation = document.getElementById(location);
+  theLocation.appendChild(next);
+  next.classList.add('current');
+  next.classList.remove('hide');
+}
+
+// Run on page load.
+
+// Show reviews when page loads.
+for (var i = 0; i < reviews.length; i++) {
+  var recentReview = document.getElementById('recent-reviews');
+  recentReview.appendChild(review(reviews[i]));
 }
