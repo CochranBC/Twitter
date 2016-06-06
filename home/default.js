@@ -33,29 +33,13 @@ push.addEventListener('click', function() {
 var reviewButton = document.getElementById('review-button');
 reviewButton.addEventListener('click', function toggle(reviewButton, form) {
   var form = document.getElementById('review');
-  var update = form.className.split(" ");
-  var offset = update.indexOf("hide");
-
-  if (offset !== -1) {
-    update.splice(offset, 1);
-    form.className = update.join(" ");
-  } else {
-    form.className += " " + reviewButton;
-  }
-});
-reviewButton.addEventListener('click', function() {
-  var results = document.getElementById('results');
-  results.style.display = "none";
-});
-
-reviewButton.addEventListener('click', function() {
-  var recentReviews = document.getElementById('recent-reviews');
-  recentReviews.style.display = "none";
+  swap('current', form, 'view');
 });
 
 var home = document.getElementById('home');
 home.addEventListener('click', function() {
-  location.href = "index.html";
+  var recentReview = document.getElementById('recent-reviews');
+  swap('current', recentReview, 'view');
 });
 
 var addReview = document.getElementById('add-review');
@@ -68,6 +52,10 @@ addReview.addEventListener('click', function() {
   review.name = businessName.value;
   review.review = newCritique.value;
   reviews.unshift(review);
+
+  var recentReview = document.getElementById('recent-reviews')
+  swap('current', recentReview, 'view');
+  showAllReviews();
 });
 
 // Functions
@@ -132,10 +120,21 @@ function swap(current, next, location) {
   next.classList.remove('hide');
 }
 
+function showAllReviews() {
+  var recentReview = document.getElementById('recent-reviews');
+  clear(recentReview);
+  for (var i = 0; i < reviews.length; i++) {
+    recentReview.appendChild(review(reviews[i]));
+  }
+}
+
+function clear(area) {
+  while(area.firstChild) {
+    area.removeChild(area.firstChild);
+  }
+}
+
 // Run on page load.
 
 // Show reviews when page loads.
-for (var i = 0; i < reviews.length; i++) {
-  var recentReview = document.getElementById('recent-reviews');
-  recentReview.appendChild(review(reviews[i]));
-}
+showAllReviews();
