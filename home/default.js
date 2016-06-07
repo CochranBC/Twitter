@@ -59,6 +59,31 @@ addReview.addEventListener('click', function() {
   showAllReviews();
 });
 
+// First get the element that contains the Stars
+var theStars = document.getElementById('star');
+
+// Listen for mouse over events on the stars.
+theStars.addEventListener('mouseover', function(theEvent) {
+  // Get the individual stars.
+  var stars = theStars.getElementsByTagName('span');
+  //Get the rating for the star that was moused over
+  var rating = theEvent.target.getAttribute('id');
+
+  //Go through all the stars
+  for (var i = 0; i < stars.length; i++) {
+
+    //If the star that was moused over's rating
+    // is higher than the current star, fill it
+    if (rating > i) {
+      stars[i].classList.remove('fa-star-o');
+      stars[i].classList.add('fa-star');
+    } else {
+      stars[i].classList.add('fa-star-o');
+      stars[i].classList.remove('fa-star');
+    }
+  };
+});
+
 // Functions
 function partialMatch(text) {
   var suggestions = [];
