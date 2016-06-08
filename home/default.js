@@ -16,9 +16,10 @@ var reviews = [
     name: 'Discount Tire',
     reviewer: 'Sam',
     review: 'Buying tires can be pretty expensive if you come here. The upside is purchasing the warranty. Then whenever something happens to your tire, you can get it replaced for a reasonable price.',
-    rating: 5
+    score: 5
   }
 ];
+
 
 // Event Listeners
 var push = document.getElementById('searchbutton');
@@ -101,6 +102,7 @@ function partialMatch(text) {
 };
 
 function review(data) {
+  console.log(data.score);
   var msg = ' wrote a review for ';
   var description = document.createElement('div');
 
@@ -117,25 +119,40 @@ function review(data) {
 
   var starP = document.createElement('p');
 
-  var starOne = document.createElement('span');
-  starOne.setAttribute('class', 'fa fa-star-o fa-3x');
-  starOne.setAttribute('id', '1');
+  // Takes a rating and returns star elements with correct classes.
+  function makeStars(rating) {
+    // Create an array to store the elements we are making.
+    var theStars = [];
 
-  var starTwo = document.createElement('span');
-  starTwo.setAttribute('class', 'fa fa-star-o fa-3x');
-  starTwo.setAttribute('id', '2');
+    // Loop through and create 5 star elements.
+    for (var i = 0; i < 5; i++) {
 
-  var starThree = document.createElement('span');
-  starThree.setAttribute('class', 'fa fa-star-o fa-3x');
-  starThree.setAttribute('id', '3');
+      var theStar = document.createElement('span');
 
-  var starFour = document.createElement('span');
-  starFour.setAttribute('class', 'fa fa-star-o fa-3x');
-  starFour.setAttribute('id', '4');
+      // Set the correct class to style this star as full or empty.
+      if (rating > i) {
+        var theClass = 'fa-star';
+      } else {
+        var theClass = 'fa-star-o';
+      }
+      theStar.setAttribute('class', 'fa ' + theClass + ' fa-3x');
+      theStar.setAttribute('id', i + 1);
 
-  var starFive = document.createElement('span');
-  starFive.setAttribute('class', 'fa fa-star-o fa-3x');
-  starFive.setAttribute('id', '5');
+      // After we create the element push it into the array we plan to return.
+      theStars.push(theStar);
+    }
+
+    // Return the array of star elements with the correct style classes.
+    return theStars;
+  }
+
+  // Call the function we created above with the current data.score value.
+  var starElements = makeStars(data.score);
+
+  // Take the returned array of elements and append them to the DOM.
+  for (var i = 0; i < starElements.length; i++) {
+    starP.appendChild(starElements[i]);
+  }
 
   var customer = document.createElement('span');
   customer.textContent = data.reviewer;
@@ -154,11 +171,6 @@ function review(data) {
   paragraph.appendChild(customer);
   paragraph.appendChild(write);
   paragraph.appendChild(business);
-  starP.appendChild(starOne);
-  starP.appendChild(starTwo);
-  starP.appendChild(starThree);
-  starP.appendChild(starFour);
-  starP.appendChild(starFive);
   description.appendChild(paragraph);
   description.appendChild(starP);
   description.appendChild(critique);
