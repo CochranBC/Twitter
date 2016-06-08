@@ -52,7 +52,14 @@ addReview.addEventListener('click', function() {
   var firstName = document.getElementById('first-name');
   var businessName = document.getElementById('business-name');
   var newCritique = document.getElementById('new-critique');
+
+  // Find the highest filled in star on the page.
+  var stars = document.getElementById('star');
+  var filledInStars = stars.getElementsByClassName('fa-star');
+  console.log("The rating is " + filledInStars.length);
+
   var review = {};
+  review.score = filledInStars.length;
   review.reviewer = firstName.value;
   review.name = businessName.value;
   review.review = newCritique.value;
@@ -67,10 +74,11 @@ addReview.addEventListener('click', function() {
 var theStars = document.getElementById('star');
 
 // Listen for mouse over events on the stars.
-theStars.addEventListener('mouseover', function(theEvent) {
+theStars.addEventListener('mouseover', function score(theEvent) {
   // Get the individual stars.
   var stars = theStars.getElementsByTagName('span');
-  //Get the rating for the star that was moused over
+
+  //Get the rating for the star that was moused over.
   var rating = theEvent.target.getAttribute('id');
 
   //Go through all the stars
