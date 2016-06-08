@@ -3,17 +3,20 @@ var reviews = [
   {
     name: 'Starbucks',
     reviewer: 'Tom',
-    review: 'I enjoy coming here because the staff remembers me by name and they are very courteous. The place is clean and well kept.'
+    review: 'I enjoy coming here because the staff remembers me by name and they are very courteous. The place is clean and well kept.',
+    score: 2
   },
   {
     name: 'La Salsa',
     reviewer: 'Brittney',
-    review: 'They have a wide selection of salsas to choose from. My favorite is the avacado. It gets pretty busy for lunch time, so I like the fact that I can call ahead and place my order. Then I do not have to wait in line.'
+    review: 'They have a wide selection of salsas to choose from. My favorite is the avacado. It gets pretty busy for lunch time, so I like the fact that I can call ahead and place my order. Then I do not have to wait in line.',
+    score: 3
   },
   {
     name: 'Discount Tire',
     reviewer: 'Sam',
-    review: 'Buying tires can be pretty expensive if you come here. The upside is purchasing the warranty. Then whenever something happens to your tire, you can get it replaced for a reasonable price.'
+    review: 'Buying tires can be pretty expensive if you come here. The upside is purchasing the warranty. Then whenever something happens to your tire, you can get it replaced for a reasonable price.',
+    rating: 5
   }
 ];
 
@@ -112,6 +115,28 @@ function review(data) {
 
   var paragraph = document.createElement('p');
 
+  var starP = document.createElement('p');
+
+  var starOne = document.createElement('span');
+  starOne.setAttribute('class', 'fa fa-star-o fa-3x');
+  starOne.setAttribute('id', '1');
+
+  var starTwo = document.createElement('span');
+  starTwo.setAttribute('class', 'fa fa-star-o fa-3x');
+  starTwo.setAttribute('id', '2');
+
+  var starThree = document.createElement('span');
+  starThree.setAttribute('class', 'fa fa-star-o fa-3x');
+  starThree.setAttribute('id', '3');
+
+  var starFour = document.createElement('span');
+  starFour.setAttribute('class', 'fa fa-star-o fa-3x');
+  starFour.setAttribute('id', '4');
+
+  var starFive = document.createElement('span');
+  starFive.setAttribute('class', 'fa fa-star-o fa-3x');
+  starFive.setAttribute('id', '5');
+
   var customer = document.createElement('span');
   customer.textContent = data.reviewer;
 
@@ -129,7 +154,13 @@ function review(data) {
   paragraph.appendChild(customer);
   paragraph.appendChild(write);
   paragraph.appendChild(business);
+  starP.appendChild(starOne);
+  starP.appendChild(starTwo);
+  starP.appendChild(starThree);
+  starP.appendChild(starFour);
+  starP.appendChild(starFive);
   description.appendChild(paragraph);
+  description.appendChild(starP);
   description.appendChild(critique);
   panelBody.appendChild(description);
   return container;
