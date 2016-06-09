@@ -1,40 +1,45 @@
+
 var locations = [
   {
     business: 'Saddle Ranch',
     addressOne: '1870 Harbor Blvd',
-    addressTwo:
+    addressTwo: ' ',
     city: 'Costa Mesa',
     state: 'CA',
     zip: '92627',
     phone: '(949) 651-8760',
     website: 'http://www.thesaddleranch.com/',
-    category: 'Traditional American', 'Steakhouse'
+    category: 'Traditional American Steakhouse'
   },
   {
     business: 'Taco Bell',
     addressOne: '3010 El Camino Real',
-    addressTwo:
+    addressTwo: ' ',
     city: 'Tustin',
     state: 'CA',
     zip: '92782',
     phone: '(714) 832-1767',
     website: 'https://www.tacobell.com/',
-    category: 'Fast Food', 'Mexican', 'Tex-Mex',
+    category: 'Fast Food Mexican Tex-Mex'
   },
   {
     business: 'Chase',
     addressOne: '3978 Barranca Pkwy',
-    addressTwo:
+    addressTwo: ' ',
     city: 'Irvine',
     state: 'CA',
     zip: '92606',
     phone: '(949) 559-5072',
     website: 'https://www.chase.com/',
     category: 'Banks'
-  },
+  }
 ];
 
-
+var addBusiness = document.getElementById('add-business');
+addBusiness.addEventListener('click', function() {
+  var newBusiness = document.getElementById('new-business');
+  swap('current', newBusiness, 'view');
+});
 
 
 

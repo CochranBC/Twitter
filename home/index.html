@@ -27,10 +27,11 @@
     </div>
   </div>
   <div class="row" id="navigation">
-    <div class="col-md-offset-4 col-md-2">
+    <div class="col-md-offset-4 col-md-4">
       <div class="btn-group">
         <button class="btn btn-default" id="home"  type="button" value="button">Home</button>
         <button class="btn btn-default" id="review-button" type="button" value="button">Write a reveiw</button>
+        <button class="btn btn-default" id="add-business" type="button" value="button">Add Business</button>
       </div>
     </div>
   </div>
@@ -77,9 +78,9 @@
         </form>
       </div>
     </div>
-    <div class="row hide" id="location">
+    <div class="row hide" id="new-business">
       <div class="col-md-offset-3 col-md-5">
-        <form class="form-horizontal" id="form">
+        <form class="form-horizontal" id="location">
           <div class="form-group">
             <label for="company" class="col-md-4 control-label">Business Name</label>
             <div class="col-md-8">
@@ -134,13 +135,16 @@
               <input type="text" class="form-control" id="category" placeholder="Traditional American">
             </div>
           </div>
+          <div class="col-md-offset-10 col-md-2">
+            <button class="btn btn-danger" id="add-company" type="button" value="submit">Submit</button>
+          </div>
         </form>
       </div>
     </div>
   </div>
   <script src="default.js">
   </script>
-  <!-- <script src="locations.js">
-  </script> -->
+  <script src="locations.js">
+  </script>
 </body>
 </html>
