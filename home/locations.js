@@ -41,69 +41,120 @@ addBusiness.addEventListener('click', function() {
   swap('current', newBusiness, 'view');
 });
 
+var addCompany = document.getElementById('add-company');
+addCompany.addEventListener('click', function() {
+  var companyName = document.getElementById('company');
+  var addressFirst = document.getElementById('address-one');
+  var addressSecond = document.getElementById('address-two');
+  var cityName = document.getElementById('city');
+  var stateName = document.getElementById('state');
+  var zipcode = document.getElementById('zip');
+  var phoneNumber = document.getElementById('phone');
+  var websitePage = document.getElementById('website');
+  var categories = document.getElementById('category');
+
+  var location = {};
+  location.business = companyName.value;
+  location.addressOne = addressFirst.value;
+  location.addressTwo = addressSecond.value;
+  location.city = cityName.value;
+  location.state = stateName.value;
+  location.zip = zipcode.value;
+  location.phone = phoneNumber.value;
+  location.website = websitePage.value;
+  location.category = categories.value;
+  locations.unshift(location);
+
+  var businessList = document.getElementById('business-listing')
+  swap('current', businessList, 'view');
+  showAllBusinesses();
+});
+
+function businessList(data) {
+  var repository = document.createElement('div');
+  repository.setAttribute('class', 'col-md-offset-3 col-md-6');
+
+  var border = document.createElement('div');
+  border.setAttribute('class', 'panel panel-default');
+
+  var borderBody = document.createElement('div');
+  borderBody.setAttribute('class', 'panel-body');
+
+  var report = document.createElement('div');
+
+  var header = document.createElement('h3');
+  header.setAttribute('class', 'col-md-12 text-center h3');
+  header.textContent = data.business;
+
+  var place = document.createElement('p');
+  place.setAttribute('class', 'text-center');
 
 
+  var comma = ', ';
 
+  var space = ' ';
 
+  var town = document.createElement('span');
+  town.textContent = data.city
 
+  var punctuation = document.createElement('span');
+  punctuation.textContent = comma;
 
+  var province = document.createElement('span');
+  province.textContent = data.state;
 
+  var gap = document.createElement('span');
+  gap.textContent = space;
 
+  var zone = document.createElement('span');
+  zone.textContent = data.zip;
 
+  var call = document.createElement('p');
+  call.setAttribute('class', 'text-center');
+  call.textContent = data.phone;
 
+  // <button class="btn btn-default" id="add-business" type="button" value="button">Add Business</button>
+  var line = document.createElement('p');
+  line.setAttribute('class', 'text-center');
 
+  var buttonText = 'View Profile';
 
+  var profile = document.createElement('button');
+  profile.setAttribute('class', 'btn btn-danger');
+  profile.setAttribute('id', 'businessProfile');
+  profile.setAttribute('type', 'button');
+  profile.setAttribute('value', 'button');
+  profile.textContent = buttonText;
 
+  repository.appendChild(border);
+  border.appendChild(borderBody);
+  place.appendChild(town);
+  place.appendChild(punctuation);
+  place.appendChild(province);
+  place.appendChild(gap);
+  place.appendChild(zone);
+  line.appendChild(profile);
+  report.appendChild(header);
+  report.appendChild(place);
+  report.appendChild(call);
+  report.appendChild(line);
+  borderBody.appendChild(report);
 
+  return repository;
+}
 
+function showAllBusinesses() {
+  var businessListing = document.getElementById('business-listing');
+  clear(businessListing);
+  var message = 'Businesses';
+  var title = document.createElement('h2');
+  title.setAttribute('class', 'col-md-offset-1 col-md-3 text-right h2');
+  title.textContent = message;
+  businessListing.appendChild(title);
 
+  for (var i = 0; i < locations.length; i++) {
 
+    businessListing.appendChild(businessList(locations[i]));
 
-
-
-
-// The long way.
-
-// var starOne = document.createElement('span');
-// if (data.score >= 1) {
-//   var theClass = 'fa-star';
-// } else {
-//   var theClass = 'fa-star-o';
-// }
-// starOne.setAttribute('class', 'fa ' + theClass + ' fa-3x');
-// starOne.setAttribute('id', '1');
-// var starTwo = document.createElement('span');
-// if (data.score >= 2) {
-//   var theClass = 'fa-star';
-// } else {
-//   var theClass = 'fa-star-o';
-// }
-// starTwo.setAttribute('class', 'fa ' + theClass + ' fa-3x');
-// starTwo.setAttribute('id', '2');
-//
-// if (data.score >= 3) {
-//   var theClass = 'fa-star';
-// } else {
-//   var theClass = 'fa-star-o';
-// }
-// var starThree = document.createElement('span');
-// starThree.setAttribute('class', 'fa ' + theClass + ' fa-3x');
-// starThree.setAttribute('id', '3');
-//
-// if (data.score >= 4) {
-//   var theClass = 'fa-star';
-// } else {
-//   var theClass = 'fa-star-o';
-// }
-// var starFour = document.createElement('span');
-// starFour.setAttribute('class', 'fa ' + theClass + ' fa-3x');
-// starFour.setAttribute('id', '4');
-//
-// if (data.score >= 5) {
-//   var theClass = 'fa-star';
-// } else {
-//   var theClass = 'fa-star-o';
-// }
-// var starFive = document.createElement('span');
-// starFive.setAttribute('class', 'fa ' + theClass + ' fa-3x');
-// starFive.setAttribute('id', '5');
+  }
+}
