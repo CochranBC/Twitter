@@ -56,7 +56,6 @@ addReview.addEventListener('click', function() {
   // Find the highest filled in star on the page.
   var stars = document.getElementById('star');
   var filledInStars = stars.getElementsByClassName('fa-star');
-  console.log("The rating is " + filledInStars.length);
 
   var review = {};
   review.score = filledInStars.length;
@@ -110,8 +109,8 @@ function partialMatch(text) {
 };
 
 function review(data) {
-  console.log(data.score);
   var msg = ' wrote a review for ';
+
   var description = document.createElement('div');
 
   var container = document.createElement('div');
@@ -200,7 +199,14 @@ function swap(current, next, location) {
 function showAllReviews() {
   var recentReview = document.getElementById('recent-reviews');
   clear(recentReview);
+  var message = 'Recent Reviews';
+  var title = document.createElement('h2');
+  title.setAttribute('class', 'col-md-offset-1 col-md-3 text-right h2');
+  title.textContent = message;
+  recentReview.appendChild(title);
+
   for (var i = 0; i < reviews.length; i++) {
+
     recentReview.appendChild(review(reviews[i]));
   }
 }

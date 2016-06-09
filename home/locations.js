@@ -41,6 +41,13 @@ addBusiness.addEventListener('click', function() {
   swap('current', newBusiness, 'view');
 });
 
+var viewBusinesses = document.getElementById('view-businesses');
+viewBusinesses.addEventListener('click', function() {
+  var businessesList = document.getElementById('business-listing');
+  swap('current', businessesList, 'view');
+  showAllBusinesses();
+});
+
 var addCompany = document.getElementById('add-company');
 addCompany.addEventListener('click', function() {
   var companyName = document.getElementById('company');
@@ -65,7 +72,7 @@ addCompany.addEventListener('click', function() {
   location.category = categories.value;
   locations.unshift(location);
 
-  var businessList = document.getElementById('business-listing')
+  var businessList = document.getElementById('business-listing');
   swap('current', businessList, 'view');
   showAllBusinesses();
 });
