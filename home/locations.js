@@ -3,35 +3,38 @@ var locations = [
   {
     business: 'Saddle Ranch',
     addressOne: '1870 Harbor Blvd',
-    addressTwo: ' ',
+    addressTwo: '',
     city: 'Costa Mesa',
     state: 'CA',
     zip: '92627',
     phone: '(949) 651-8760',
     website: 'http://www.thesaddleranch.com/',
-    category: 'Traditional American Steakhouse'
+    category: 'Traditional American, Steakhouse',
+    tag: 1
   },
   {
     business: 'Taco Bell',
     addressOne: '3010 El Camino Real',
-    addressTwo: ' ',
+    addressTwo: '',
     city: 'Tustin',
     state: 'CA',
     zip: '92782',
     phone: '(714) 832-1767',
     website: 'https://www.tacobell.com/',
-    category: 'Fast Food Mexican Tex-Mex'
+    category: 'Fast Food, Mexican, Tex-Mex',
+    tag: 2
   },
   {
     business: 'Chase',
     addressOne: '3978 Barranca Pkwy',
-    addressTwo: ' ',
+    addressTwo: '',
     city: 'Irvine',
     state: 'CA',
     zip: '92606',
     phone: '(949) 559-5072',
     website: 'https://www.chase.com/',
-    category: 'Banks'
+    category: 'Banks',
+    tag: 3
   }
 ];
 
@@ -70,12 +73,14 @@ addCompany.addEventListener('click', function() {
   location.phone = phoneNumber.value;
   location.website = websitePage.value;
   location.category = categories.value;
+  location.tag = locations.length+1;
   locations.unshift(location);
 
   var businessList = document.getElementById('business-listing');
   swap('current', businessList, 'view');
   showAllBusinesses();
 });
+
 
 function businessList(data) {
   var repository = document.createElement('div');
@@ -88,6 +93,8 @@ function businessList(data) {
   borderBody.setAttribute('class', 'panel-body');
 
   var report = document.createElement('div');
+  report.setAttribute('id', 'businessBox');
+
 
   var header = document.createElement('h3');
   header.setAttribute('class', 'col-md-12 text-center h3');
@@ -120,7 +127,6 @@ function businessList(data) {
   call.setAttribute('class', 'text-center');
   call.textContent = data.phone;
 
-  // <button class="btn btn-default" id="add-business" type="button" value="button">Add Business</button>
   var line = document.createElement('p');
   line.setAttribute('class', 'text-center');
 
@@ -128,10 +134,22 @@ function businessList(data) {
 
   var profile = document.createElement('button');
   profile.setAttribute('class', 'btn btn-danger');
-  profile.setAttribute('id', 'businessProfile');
+  profile.setAttribute('id', data.tag);
   profile.setAttribute('type', 'button');
   profile.setAttribute('value', 'button');
   profile.textContent = buttonText;
+
+  // var companyProfile = document.getElementById('company-profile');
+  profile.addEventListener('click', function(e) {
+    var businessProfile = document.getElementById('business-profile');
+    var designation = e.target.getAttribute('id');
+    clear(businessProfile);
+    var theBusiness = findBusinessByTag(locations, designation)[0];
+    businessProfile.appendChild(businessDepiction(theBusiness));
+
+    // Swap in this view.
+    swap('current', businessProfile, 'view');
+  });
 
   repository.appendChild(border);
   border.appendChild(borderBody);
@@ -148,7 +166,95 @@ function businessList(data) {
   borderBody.appendChild(report);
 
   return repository;
-}
+};
+;
+
+function findBusinessByTag(businesses, tag) {
+  var businessObject = [];
+  for ( var i = 0; i < businesses.length; i = i + 1 ) {
+    if ( businesses[i].tag == tag) {
+      businessObject.push(businesses[i]);
+    }
+  }
+  return businessObject;
+};
+
+function businessDepiction(data) {
+  var store = document.createElement('div');
+  store.setAttribute('class', 'col-md-offset-3 col-md-6');
+
+  var outline = document.createElement('div');
+  outline.setAttribute('class', 'panel panel-default');
+
+  var outlineBody = document.createElement('div');
+  outlineBody.setAttribute('class', 'panel-body');
+
+  var record = document.createElement('div');
+
+  var heading = document.createElement('h3');
+  heading.setAttribute('class', 'col-md-12 text-center h3');
+  heading.textContent = data.business;
+
+  var region = document.createElement('p');
+
+  var mark = ', ';
+
+  var blank = ' ';
+
+  var categoryText = 'Category: '
+
+  var residence = document.createElement('p');
+  residence.textContent = data.addressOne;
+
+  var residenceTwo = document.createElement('p');
+  residenceTwo.textContent = data.addressTwo;
+
+  var webPage = document.createElement('p');
+  webPage.textContent = data.website;
+
+  var suburb = document.createElement('span');
+  suburb.textContent = data.city
+
+  var refernce = document.createElement('span');
+  refernce.textContent = mark;
+
+  var territory = document.createElement('span');
+  territory.textContent = data.state;
+
+  var interlude = document.createElement('span');
+  interlude.textContent = blank;
+
+  var sector = document.createElement('span');
+  sector.textContent = data.zip;
+
+  var telephone = document.createElement('p');
+  telephone.textContent = data.phone;
+
+  var categoryTitle = document.createElement('span')
+  categoryTitle.textContent = categoryText;
+
+  var variety = document.createElement('span');
+  variety.textContent = data.category;
+
+  store.appendChild(outline);
+  outline.appendChild(outlineBody);
+  region.appendChild(suburb);
+  region.appendChild(refernce);
+  region.appendChild(territory);
+  region.appendChild(interlude);
+  region.appendChild(sector);
+  record.appendChild(heading);
+  record.appendChild(residence);
+  record.appendChild(residenceTwo);
+  record.appendChild(region);
+  record.appendChild(telephone);
+  record.appendChild(webPage);
+  record.appendChild(categoryTitle);
+  record.appendChild(variety);
+  outlineBody.appendChild(record);
+
+  return store;
+};
 
 function showAllBusinesses() {
   var businessListing = document.getElementById('business-listing');
@@ -164,4 +270,4 @@ function showAllBusinesses() {
     businessListing.appendChild(businessList(locations[i]));
 
   }
-}
+};
